@@ -24,6 +24,17 @@ jobs:
         run: |
           pip install requests
 
+      - name: 파일 확인
+        run: |
+          echo "현재 위치:"
+          pwd
+          echo "파일 목록:"
+          ls -la
+          echo "Git 상태:"
+          git status
+          echo "lunch_bot.py 검색:"
+          find . -name "lunch_bot.py" -print
+
       - name: 광양 점심 메뉴 가져오기 및 Telegram 전송
         env:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
