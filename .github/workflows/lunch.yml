@@ -1,0 +1,28 @@
+name: 광양 점심비서
+
+on:
+  workflow_dispatch:
+
+  schedule:
+    - cron: "30 8 * * *"
+      timezone: "Asia/Seoul"
+
+jobs:
+  send-lunch-menu:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Python 준비
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: requests 설치
+        run: |
+          pip install requests
+
+      - name: 광양 점심 메뉴 가져오기 및 Telegram 전송
+        env:
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+        run: |
+          python lunch_bot.py
